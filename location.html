@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Location Search</title>
+</head>
+<body>
+  <h1>Location Search</h1>
+  <p>Enter a keyword to search for related locations:</p>
+
+  <!-- Input for keyword -->
+  <input type="text" id="keyword" placeholder="Enter a keyword">
+  
+  <!-- Dropdown for location suggestions -->
+  <select id="locationDropdown">
+    <option value="" disabled selected>Select a location</option>
+  </select>
+
+  <!-- Script to handle user input and location search -->
+  <script>
+    const apiKey = '1a3dd4d3c292b296e149eda20f50939c'; // Replace with your actual IPstack API key
+    const apiUrl = `http://api.ipstack.com/autocomplete?access_key=${apiKey}`;
+    
+    const keywordInput = document.getElementById('keyword');
+    const locationDropdown = document.getElementById('locationDropdown');
+    
+    // Function to update the dropdown with location suggestions
+    function updateDropdown(locations) {
+      locationDropdown.innerHTML = '<option value="" disabled selected>Select a location</option>';
+      locations.forEach(location => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location;
+        locationDropdown.appendChild(option);
+      });
+    }
+    
+    // Function to fetch location suggestions based on the keyword
+    function fetchLocationSuggestions(keyword) {
+      if (keyword) {
+        fetch(`${apiUrl}&query=${keyword}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.length > 0) {
+              updateDropdown(data);
+            } else {
+              locationDropdown.innerHTML = '<option value="" disabled>No results found</option>';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      } else {
+        // Clear the dropdown if the keyword is empty
+        locationDropdown.innerHTML = '<option value="" disabled selected>Select a location</option>';
+      }
+    }
+    
+    // Event listener to detect user input changes
+    keywordInput.addEventListener('input', function () {
+      fetchLocationSuggestions(keywordInput.value);
+    });
+  </script>
+</body>
+</html>

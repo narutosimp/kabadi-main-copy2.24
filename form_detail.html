@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kadbadiwala Contact us Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="./formstyel.css">
+</head>
+<body>
+<div class="container">
+  <div class="text">
+    Contact us Form
+  </div>
+  <form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfoDG2IvM0HE8TGDJADbqrjB2cL2Me2N_teQLZ7iHSkUdxPBw/formResponse">
+    <div class="form-row">
+        <!-- required name="entry.836407170" -->
+      <div class="input-data">
+        <input type="date" id="date" name="date" value="Date" >
+      </div>
+      <div class="input-data">
+        <div class="underline"></div>
+        <label for="time"></label>
+        <input type="time" id="time" name="time" min="11:00" max="18:00" value="time">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="input-data">
+        <input type="text" name="address" required>
+        <div class="underline"></div>
+        <label for="">Address with landmark</label>
+      </div>
+      <div class="input-data">
+        <input type="text"name="person_name" required>
+        <div class="underline"></div>
+        <label for="">Available person </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="input-data textarea">
+        <div class="radio_selector">
+          <input type="radio" name="select">Home recycling
+          <input type="radio" name="select">Industrial recycling
+        </div>
+      </div>
+
+      <!-- Dropdown menu with 5 options -->
+      <div class="form-row">
+        <div class="input-area dropdown">
+          <label for="weight">Select weight</label>
+          <select id="weight" name="weight">
+            <option value="5 kg">5 kg</option>
+            <option value="10 kg">10 kg</option>
+            <option value="15 kg">15 kg</option>
+            <option value="20 kg">20 kg</option>
+            <option value="25 kg">25 kg</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row submit-btn">
+        <div class="input-data">
+           <div class="inner"></div>
+           <input type="submit" value="submit">
+        </div>
+     </div>
+    </div>
+  </form>
+</div>
+<!-- partial -->
+</body>
+<script>
+  
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzT9E7AIf6Ptf9THsuuQzYlAyoIaLcNdFgizodKtHEpIK8i-hl3bwnQGTLwzoFEJmSG/exec'
+  const form = document.forms['submit-to-google-sheet']
+const msg = document.getElementById('msg')
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+   msg.innerHTML = "Thank you for your message";
+   setTimeout(function(){
+    msg.innerHTML = " "
+   },5000)
+   form.reset
+      }
+      )
+      .catch(error => console.error('Error!', error.message))
+  })
+  // Your JavaScript code here
+</script>
+</html>
