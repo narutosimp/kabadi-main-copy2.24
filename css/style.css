@@ -383,7 +383,7 @@ a:focus {
   font-weight: bold;
   text-align: center;
   padding-top: -194px;
-  margin-bottom: 15px;
+  margin-bottom: -25px;
   justify-content: space-between;
 }
 .feature_section .feature_container {
@@ -391,7 +391,7 @@ a:focus {
   flex-wrap: wrap;
   justify-content: space-between;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: -15px;
 }
 .feature_section .feature_container .box {
   display: flex;
@@ -747,12 +747,11 @@ a:focus {
 }
 
 .redirect {
-  margin-left: 200px;
-  float: left;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 90%;
+  display: flex; 
+  float: right;
+  rotate: 270deg;
+   margin-left: 70%; 
+  
 }
 
 .footer_section p {
